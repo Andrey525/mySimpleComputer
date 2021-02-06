@@ -1,5 +1,9 @@
+#include <stdio.h>
+
 #ifndef COMP_H
 #define COMP_H
+#define SIZE_OF_MEMORY 100
+int RAM[SIZE_OF_MEMORY];
 
 int sc_memoryInit();
 int sc_memorySet(int adress, int value);
