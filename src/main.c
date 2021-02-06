@@ -25,5 +25,8 @@ int main()
         printf("%d ", RAM[i]);
     }
     printf("\n\n");
+    printf("flag == %d\n", flag);
+    sc_regInit();
+    printf("flag == %d\n", flag);
     return 0;
 }

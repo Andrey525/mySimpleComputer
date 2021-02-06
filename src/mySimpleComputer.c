@@ -56,3 +56,10 @@ int sc_memoryLoad(char* filename)
     }
     return 0;
 }
+
+int sc_regInit()
+{
+	flag = 0;
+	return 0;
+}
+
