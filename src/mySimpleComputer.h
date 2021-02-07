@@ -4,9 +4,9 @@
 #ifndef COMP_H
 #define COMP_H
 #define SIZE_OF_MEMORY 100
-#define BIT_CHECK(A, B) ((A >> B) & 0x1)
-#define BIT_SET(A, B) ((A = ((A) | (0x1 << B))))
-#define BIT_DELETE(A, B) (A = ((A) & (~(0x1 << B))))
+#define BIT_CHECK(REG, RANK) ((REG >> RANK) & 0x1)
+#define BIT_SET(REG, RANK) ((REG = ((REG) | (0x1 << RANK))))
+#define BIT_DELETE(REG, RANK) (REG = ((REG) & (~(0x1 << RANK))))
 int RAM[SIZE_OF_MEMORY];
 int registr_of_flags; // регистр флагов(переменная хранящая флаги (32 штуки))
 
