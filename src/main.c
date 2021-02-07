@@ -25,8 +25,14 @@ int main()
         printf("%d ", RAM[i]);
     }
     printf("\n\n");
-    printf("flag == %d\n", flag);
+    // printf("registr_of_flags == %d\n", registr_of_flags);
     sc_regInit();
-    printf("flag == %d\n", flag);
+    printf("registr_of_flags == %d\n", registr_of_flags);
+    sc_regSet(2, 1);
+    sc_regSet(6, 1);
+    sc_regSet(5, 1);
+    printf("registr_of_flags == %d\n", registr_of_flags);
+    sc_regGet(5, &value);
+    printf("value == %d\n", value);
     return 0;
 }

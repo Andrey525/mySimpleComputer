@@ -59,7 +59,33 @@ int sc_memoryLoad(char* filename)
 
 int sc_regInit()
 {
-	flag = 0;
-	return 0;
+    registr_of_flags = 0;
+    return 0;
 }
 
+int sc_regSet(int rank, int value)
+{
+    if (((value == 1) || (value == 0)) == false) { // проверка на допустимое значение
+        return 4;
+    }
+    if ((rank < 0) || (rank > 31)) { // проверка на допустимый разряд
+        return 5;
+    }
+    if (value == 1) {
+        // registr_of_flags = registr_of_flags | (0x1 << rank);
+        BIT_SET(registr_of_flags, rank);
+    } else if (value == 0) {
+        // registr_of_flags = registr_of_flags & (~(0x1 << rank));
+        BIT_DELETE(registr_of_flags, rank);
+    }
+    return 0;
+}
+
+int sc_regGet(int rank, int* value)
+{
+	if ((rank < 0) || (rank > 31)) { // проверка на допустимый разряд
+        return 5;
+    }
+    *value = BIT_CHECK(registr_of_flags, rank);
+    return 0;
+}
