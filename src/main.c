@@ -27,12 +27,13 @@ int main()
     printf("\n\n");
     // printf("registr_of_flags == %d\n", registr_of_flags);
     sc_regInit();
+    sc_memorySet(514, 17);
     printf("registr_of_flags == %d\n", registr_of_flags);
-    sc_regSet(2, 1);
-    sc_regSet(6, 1);
-    sc_regSet(5, 1);
+    // sc_regSet(OVERFLOW, 1);
+    // sc_regSet(ERROR_EXIT_RANGE_MEMORY, 1);
+    // sc_regSet(INVALID_COMMAND_SPECIFIED, 1);
     printf("registr_of_flags == %d\n", registr_of_flags);
-    sc_regGet(5, &value);
+    sc_regGet(ERROR_EXIT_RANGE_MEMORY, &value);
     printf("value == %d\n", value);
     return 0;
 }

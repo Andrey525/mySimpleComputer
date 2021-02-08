@@ -9,6 +9,6 @@ build/mySimpleComputer.o: src/mySimpleComputer.c src/mySimpleComputer.h
 	gcc -Wall -Werror -c src/mySimpleComputer.c -o build/mySimpleComputer.o 
 
 clean: 
-	rm -rf bin/prog build/*.o
+	rm -rf bin/prog build/*.o *.bin
 
 .PHONY: all clean 
