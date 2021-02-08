@@ -4,6 +4,7 @@
 #ifndef COMP_H
 #define COMP_H
 #define SIZE_OF_MEMORY 100
+
 /* МАСКИ ДЛЯ РЕГИСТРА ФЛАГОВ */
 #define OVERFLOW 0b00000001 // переполнение при выполнение операции
 #define ERROR_DIVISION_BY_ZERO 0b00000010 // ошибка деления на 0
@@ -22,8 +23,12 @@
 #define ERROR_FEOF -4 // Ошибка: преждевременный конец файла
 #define ERROR_VALUE -5 // Ошибка: недопустимое значение
 #define ERROR_RANK -6 // Ошибка: недопустимый разряд регистра
+#define ERROR_INVALID_COMMAND -7 // Ошибка: неверная команда
+#define ERROR_INVALID_OPERAND -8 // Ошибка: неверный операнд
+#define ERROR_NOT_COMMAND -9 // Ошибка: это не команда
+
 int RAM[SIZE_OF_MEMORY];
-int registr_of_flags; // регистр флагов(переменная хранящая флаги (32 штуки))
+int registr_of_flags; // регистр флагов(переменная хранящая флаги)
 
 int sc_memoryInit();
 int sc_memorySet(int adress, int value);
@@ -31,7 +36,7 @@ int sc_memoryGet(int adress, int* value);
 int sc_memorySave(char* filename);
 int sc_memoryLoad(char* filename);
 int sc_regInit();
-int sc_regSet(int registr, int value); // rank - разряд от 0 до 31, value - значение бита (либо 0, либо 1)
+int sc_regSet(int registr, int value);
 int sc_regGet(int registr, int* value);
 int sc_commandEncode(int command, int operand, int* value);
 int sc_commandDecode(int value, int* command, int* operand);

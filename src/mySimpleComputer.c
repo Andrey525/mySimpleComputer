@@ -93,7 +93,35 @@ int sc_regGet(int registr, int* value)
     return 0;
 }
 
-int sc_commandEncode(int command, int operand, int *value)
+int sc_commandEncode(int command, int operand, int* value)
 {
-	
+    if (command < 0x10 || (command > 0x11 && command < 0x20) || (command > 0x21 && command < 0x30) || (command > 0x33 && command < 0x40) || (command > 0x43 && command < 0x51) || command > 0x76) {
+        return ERROR_INVALID_COMMAND;
+    }
+    if (operand > 0x7F || operand < 0) {
+        return ERROR_INVALID_OPERAND;
+    }
+
+    *value = (command << 7) | operand;
+
+    return 0;
+}
+
+int sc_commandDecode(int value, int* command, int* operand)
+{
+    int attribute;
+    int temp_command, temp_operand;
+    attribute = value & 0x4000;
+    if (attribute != 0) {
+        return ERROR_NOT_COMMAND;
+    }
+    temp_operand = value & 0x7F;
+    temp_command = (value >> 7) & 0x7F;
+    if (temp_command < 0x10 || (temp_command > 0x11 && temp_command < 0x20) || (temp_command > 0x21 && temp_command < 0x30) || (temp_command > 0x33 && temp_command < 0x40) || (temp_command > 0x43 && temp_command < 0x51) || temp_command > 0x76) {
+        sc_regSet(INVALID_COMMAND_SPECIFIED, 1);
+        return ERROR_INVALID_COMMAND;
+    }
+    *operand = temp_operand;
+    *command = temp_command;
+    return 0;
 }

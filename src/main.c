@@ -35,5 +35,13 @@ int main()
     printf("registr_of_flags == %d\n", registr_of_flags);
     sc_regGet(ERROR_EXIT_RANGE_MEMORY, &value);
     printf("value == %d\n", value);
+
+    sc_commandEncode(0x32, 13, &value);
+    printf("value == %d\n", value);
+    int command = 0, operand = 0;
+    // value = 16365;
+    printf("value == %d\n", value);
+    sc_commandDecode(value, &command, &operand);
+    printf("command == %x operand == %d\n", command, operand);
     return 0;
 }
