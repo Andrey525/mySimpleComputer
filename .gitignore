@@ -8,3 +8,5 @@
 !build
 !src
 !.gitkeep
+!*.a
+!lib
