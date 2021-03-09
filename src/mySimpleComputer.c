@@ -11,7 +11,7 @@ int sc_memoryInit()
 int sc_memorySet(int adress, int value)
 {
     if (adress < 0 || adress >= SIZE_OF_MEMORY) {
-        sc_regSet(ERROR_EXIT_RANGE_MEMORY, 1);
+        sc_regSet(M, 1);
         return ERROR_EXIT_RANGE_ARRAY;
     }
     RAM[adress] = value;
@@ -21,7 +21,7 @@ int sc_memorySet(int adress, int value)
 int sc_memoryGet(int adress, int* value)
 {
     if (adress < 0 || adress >= SIZE_OF_MEMORY) {
-        sc_regSet(ERROR_EXIT_RANGE_MEMORY, 1);
+        sc_regSet(M, 1);
         return ERROR_EXIT_RANGE_ARRAY;
     }
     *value = RAM[adress];
@@ -66,7 +66,7 @@ int sc_regSet(int registr, int value)
     if (((value == 1) || (value == 0)) == false) { // проверка на допустимое значение
         return ERROR_VALUE;
     }
-    if ((registr == OVERFLOW || registr == ERROR_DIVISION_BY_ZERO || registr == ERROR_EXIT_RANGE_MEMORY || registr == IGNORE_CLOCK_PULSES || registr == INVALID_COMMAND_SPECIFIED) == false) { // проверка на допустимый номер регистра
+    if ((registr == P || registr == O || registr == M || registr == T || registr == E) == false) { // проверка на допустимый номер регистра
         return ERROR_RANK;
     }
     if (value == 1) {
@@ -81,7 +81,7 @@ int sc_regSet(int registr, int value)
 
 int sc_regGet(int registr, int* value)
 {
-    if ((registr == OVERFLOW || registr == ERROR_DIVISION_BY_ZERO || registr == ERROR_EXIT_RANGE_MEMORY || registr == IGNORE_CLOCK_PULSES || registr == INVALID_COMMAND_SPECIFIED) == false) { // проверка на допустимый разряд
+    if ((registr == P || registr == O || registr == M || registr == T || registr == E) == false) { // проверка на допустимый разряд
         return ERROR_RANK;
     }
     if ((registr_of_flags & registr) != 0) {
@@ -118,7 +118,7 @@ int sc_commandDecode(int value, int* command, int* operand)
     temp_operand = value & 0x7F;
     temp_command = (value >> 7) & 0x7F;
     if (temp_command < 0x10 || (temp_command > 0x11 && temp_command < 0x20) || (temp_command > 0x21 && temp_command < 0x30) || (temp_command > 0x33 && temp_command < 0x40) || (temp_command > 0x43 && temp_command < 0x51) || temp_command > 0x76) {
-        sc_regSet(INVALID_COMMAND_SPECIFIED, 1);
+        sc_regSet(E, 1);
         return ERROR_INVALID_COMMAND;
     }
     *operand = temp_operand;

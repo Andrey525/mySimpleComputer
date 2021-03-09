@@ -38,7 +38,7 @@ int main()
     // sc_regSet(INVALID_COMMAND_SPECIFIED, 1);
     printf("registr_of_flags == %d\n", registr_of_flags);
     printf("Получаем флаг регистра\n");
-    sc_regGet(ERROR_EXIT_RANGE_MEMORY, &value);
+    sc_regGet(M, &value);
     printf("value == %d\n", value);
     printf("Кодируем команду\n");
     sc_commandEncode(0x32, 13, &value);
